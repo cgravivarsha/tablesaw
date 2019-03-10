@@ -25,7 +25,7 @@ import tech.tablesaw.aggregate.Summarizer;
 import tech.tablesaw.columns.Column;
 import tech.tablesaw.io.DataFrameReader;
 import tech.tablesaw.io.DataFrameWriter;
-import tech.tablesaw.io.html.HtmlTableWriter;
+import tech.tablesaw.io.ReaderRegistry;
 import tech.tablesaw.joining.DataFrameJoiner;
 import tech.tablesaw.selection.BitmapBackedSelection;
 import tech.tablesaw.selection.Selection;
@@ -57,6 +57,8 @@ import static tech.tablesaw.selection.Selection.selectNRowsAtRandom;
  * Tables are the main data-type and primary focus of Airframe.
  */
 public class Table extends Relation implements Iterable<Row> {
+
+    public static final ReaderRegistry defaultRegistry = new ReaderRegistry();
 
     /**
      * The columns that hold the data in this table
@@ -128,7 +130,7 @@ public class Table extends Relation implements Iterable<Row> {
     }
 
     public static DataFrameReader read() {
-        return new DataFrameReader();
+        return new DataFrameReader(defaultRegistry);
     }
 
     public DataFrameWriter write() {
@@ -688,10 +690,6 @@ public class Table extends Relation implements Iterable<Row> {
      */
     public TableSliceGroup splitOn(CategoricalColumn<?>... columns) {
         return StandardTableSliceGroup.create(this, columns);
-    }
-
-    public String printHtml() {
-        return HtmlTableWriter.write(this);
     }
 
     public Table structure() {

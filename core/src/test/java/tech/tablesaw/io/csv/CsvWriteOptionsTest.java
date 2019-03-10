@@ -7,17 +7,10 @@ import java.io.ByteArrayOutputStream;
 
 import org.junit.jupiter.api.Test;
 
-import tech.tablesaw.api.StringColumn;
-import tech.tablesaw.api.Table;
-
 public class CsvWriteOptionsTest {
 
     @Test
     public void testSettingsPropagation() {
-
-        Table test = Table.create("test", StringColumn.create("t"));
-        test.stringColumn(0).appendCell("testing");
-
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         CsvWriteOptions options = new CsvWriteOptions.Builder(stream)
                 .escapeChar('~')
@@ -31,7 +24,7 @@ public class CsvWriteOptionsTest {
         assertEquals('"', options.quoteChar());
         assertEquals('.', options.separator());
 
-        CsvWriter writer = new CsvWriter(test, options);
+        CsvWriter writer = new CsvWriter(options);
         assertEquals('~', writer.getEscapeChar());
         assertTrue(writer.getHeader());
         assertEquals("\r\n", writer.getLineEnd());

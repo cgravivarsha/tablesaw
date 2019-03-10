@@ -38,55 +38,54 @@ public class DataFrameWriter {
 
     public void csv(String file) throws IOException {
         CsvWriteOptions options = new CsvWriteOptions.Builder(file).build();
-        new CsvWriter(table, options).write();
+        new CsvWriter(options).write(table);
     }
 
     public void csv(File file) throws IOException {
         CsvWriteOptions options = new CsvWriteOptions.Builder(file).build();
-        new CsvWriter(table, options).write();
+        new CsvWriter(options).write(table);
     }
 
     public void csv(CsvWriteOptions options) {
-        new CsvWriter(table, options).write();
+        new CsvWriter(options).write(table);
     }
 
     public void csv(OutputStream stream) {
         CsvWriteOptions options = new CsvWriteOptions.Builder(stream).build();
-        new CsvWriter(table, options).write();
+        new CsvWriter(options).write(table);
     }
 
     public void csv(Writer writer) {
         CsvWriteOptions options = new CsvWriteOptions.Builder(writer).build();
-        new CsvWriter(table, options).write();
+        new CsvWriter(options).write(table);
     }
 
     public void fixedWidth(String file) throws IOException {
-        FixedWidthWriteOptions options = new FixedWidthWriteOptions.Builder(file).build();
-        new FixedWidthWriter(table, options).write();
+        FixedWidthWriteOptions options = FixedWidthWriteOptions.builder(file).build();
+        new FixedWidthWriter(options).write(table);
     }
 
     public void fixedWidth(File file) throws IOException {
-        FixedWidthWriteOptions options = new FixedWidthWriteOptions.Builder(file).build();
-        new FixedWidthWriter(table, options).write();
+        FixedWidthWriteOptions options = FixedWidthWriteOptions.builder(file).build();
+        new FixedWidthWriter(options).write(table);
     }
 
     public void fixedWidth(FixedWidthWriteOptions options) {
-        new FixedWidthWriter(table, options).write();
+        new FixedWidthWriter(options).write(table);
     }
 
     public void fixedWidth(OutputStream stream) {
-        FixedWidthWriteOptions options = new FixedWidthWriteOptions.Builder(stream).build();
-        new FixedWidthWriter(table, options).write();
+        FixedWidthWriteOptions options = FixedWidthWriteOptions.builder(stream).build();
+        new FixedWidthWriter(options).write(table);
     }
 
     public void fixedWidth(Writer writer) {
-        FixedWidthWriteOptions options = new FixedWidthWriteOptions.Builder(writer).build();
-        new FixedWidthWriter(table, options).write();
+        FixedWidthWriteOptions options = FixedWidthWriteOptions.builder(writer).build();
+        new FixedWidthWriter(options).write(table);
     }
 
-
     public void html(OutputStream stream) {
-        HtmlTableWriter.write(table, stream);
+        new HtmlTableWriter().write(table, stream);
     }
 
     public String json() throws IOException {

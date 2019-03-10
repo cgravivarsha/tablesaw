@@ -28,7 +28,6 @@ final public class CsvWriter {
 
     private static final String nullValue = "";
 
-    private final Table table;
     private final boolean header;
     private final Writer writer;
     private final CsvWriterSettings settings;
@@ -36,8 +35,7 @@ final public class CsvWriter {
     /**
      * Private constructor to prevent instantiation
      */
-    public CsvWriter(Table table, CsvWriteOptions options) {
-        this.table = table;
+    public CsvWriter(CsvWriteOptions options) {
         this.header = options.header();
         this.writer = options.writer();
 
@@ -53,7 +51,7 @@ final public class CsvWriter {
 
     }
 
-    public void write() {
+    public void write(Table table) {
 
         com.univocity.parsers.csv.CsvWriter csvWriter = null;
         // Creates a writer with the above settings;
@@ -85,10 +83,6 @@ final public class CsvWriter {
 
     public String getNullValue() {
         return settings.getNullValue();
-    }
-
-    public Table getTable() {
-        return table;
     }
 
     public char getQuoteCharacter() {
